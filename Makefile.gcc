@@ -1,0 +1,30 @@
+CC = gcc.exe
+WINDRES = windres.exe
+RES  = player.res
+OBJ  = main.o help.o misc.o $(RES)
+LIBS =  -L"c:/MinGW/lib" -mwindows -lkernel32 -luser32 -lgdi32 -lcomdlg32 -lwinmm -lcomctl32
+CFLAGS = -D_WIN32_IE=0x0500 -I"c:/MinGW/include" -I"./ -Wall
+BIN  = cdplayer.exe
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	del $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CC) $(OBJ) -o $(BIN) $(LIBS)
+	strip $(BIN)
+
+main.o: main.c
+	$(CC) -c main.c -o main.o $(CFLAGS)
+
+help.o: help.c
+	$(CC) -c help.c -o help.o $(CFLAGS)
+
+misc.o: misc.c
+	$(CC) -c misc.c -o misc.o $(CFLAGS)	
+
+player.res: player.rc 
+	$(WINDRES) -i player.rc --input-format=rc -o player.res -O coff

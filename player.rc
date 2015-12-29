@@ -1,0 +1,26 @@
+#include "windows.h"
+#include "player.h"
+
+MYICON ICON myicon.ico
+
+MYMENU MENU 
+BEGIN 
+  POPUP "&File" 
+  BEGIN 
+    MENUITEM  "&Open", IDM_OPEN
+    MENUITEM  "&Close Door", IDM_CLOSE
+	MENUITEM  "&Eject", IDM_EJECT
+    MENUITEM  SEPARATOR
+    MENUITEM  "Close",  IDM_EXIT
+  END
+  POPUP "Options" 
+  BEGIN
+    MENUITEM  "&Volume", IDM_VOLUME
+  END
+  POPUP "&Help" 
+  BEGIN 
+    MENUITEM  "&About", IDM_ABOUT      
+  END		   
+END
+
+IDR_TOOLBAR1  BITMAP  "toolbar.bmp"
